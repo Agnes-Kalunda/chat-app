@@ -2,16 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    use HasFactory;
+    protected $fillable = ['conversation_id', 'user_id', 'content', 'type', 'read_at'];
 
-    protected $fillable = ['content', 'user_id'];
+    protected $casts = [
+        'read_at' => 'datetime',
+    ];
 
-    public function user(){
+    public function conversation()
+    {
+        return $this->belongsTo(Conversation::class);
+    }
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }
