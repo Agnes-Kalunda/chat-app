@@ -60,3 +60,36 @@ export default {
 }
 </script>
 
+<style>
+.app {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 300px;
+  border-right: 1px solid #e0e0e0;
+  background: #f5f5f5;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  background: #fff;
+}
+
+.no-conversation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+}
+</style>
