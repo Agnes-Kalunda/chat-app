@@ -14,7 +14,7 @@
 export default {
   data() {
     return {
-      message: ''
+      message: ''   //empty string|stores current user text
     }
   },
   computed: {
@@ -24,14 +24,14 @@ export default {
   },
   methods: {
     async sendMessage() {
-      if (!this.message.trim() || !this.currentConversation) return
+      if (!this.message.trim() || !this.currentConversation) return   //checks if msg is emty
 
       await this.$store.dispatch('sendMessage', {
         conversationId: this.currentConversation.id,
         content: this.message
       })
       
-      this.message = ''
+      this.message = '' //clear input field aftr sending msg
     }
   }
 }
