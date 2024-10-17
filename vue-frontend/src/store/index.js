@@ -30,6 +30,7 @@ export default createStore({
         }
     },
 
+    
     actions:{
         async login({ commit }, credentials){
             const { data } = await axios.post('/api/login', credentials)
