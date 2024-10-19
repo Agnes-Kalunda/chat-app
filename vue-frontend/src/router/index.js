@@ -1,22 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import App from '../App.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
+import UserLogin from '../views/UserLogin.vue'
+import UserHome from '../views/UserHome.vue' // Create this view for the authenticated home page
 
 const routes = [
   {
     path: '/',
-    component: App,
+    component: UserHome, // Assuming this will be your authenticated user's landing page
     meta: { requiresAuth: true }
   },
   {
     path: '/login',
-    component: Login
-  },
-  {
-    path: '/register',
-    component: Register
+    component: UserLogin
   }
+  // {
+  //   path: '/register',
+  //   component: Register
+  // }
 ]
 
 const router = createRouter({
@@ -24,15 +23,16 @@ const router = createRouter({
   routes
 })
 
+// Router guard for authentication
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token') // Retrieve the auth token
   
   if (to.meta.requiresAuth && !token) {
-    next('/login')
+    next('/login') // Redirect to login if trying to access a protected route
   } else if ((to.path === '/login' || to.path === '/register') && token) {
-    next('/')
+    next('/') // Redirect to home if already logged in
   } else {
-    next()
+    next() // Proceed as normal
   }
 })
 
